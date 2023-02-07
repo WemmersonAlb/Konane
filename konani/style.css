@@ -16,7 +16,8 @@ main{
 h1{
     text-align: center;
 }
-.red, .blue{
+
+/* .red, .blue{
     font-size: 2rem;
     font-weight: 900;
     text-align: center;
@@ -25,9 +26,13 @@ h1{
     color: red;
     border-radius: 50%;
 }
+
 .blue{
     color:blue;
     border-radius: 50%;
+} */
+.branco{
+    background-color: white;
 }
 .vermelha, .azul{
     width: 46px;
