@@ -33,8 +33,22 @@ h1{
 } */
 .branco{
     background-color: white;
+    transition: 1s;
+    opacity: 0;
+}
+.white{
+    background-color: white;
+    transition: 1s;
+    opacity: 1;
 }
 .vermelha, .azul{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    transition: 0.7s;
+    opacity: 1;
+}
+.peca{
     width: 46px;
     height: 46px;
     border-radius: 50%;

@@ -62,8 +62,8 @@ function construirCasas(n){
                 //casa.setAttribute('class', `casa`);
                 if(j%2==0){
                     if((i==parseInt(n/2)&&j==parseInt(n/2-1))||(i==parseInt(n/2)&&j==parseInt(n/2))){
-                        casa.setAttribute('class', `casa branco`);
-                        peca.setAttribute('class', 'branco');
+                        casa.setAttribute('class', `casa white`);
+                        peca.setAttribute('class', 'peca branco');
                         casa.appendChild(peca);
                         casaC.push(0);
                     }else{
@@ -74,8 +74,8 @@ function construirCasas(n){
                     }
                 }else{
                     if((i==parseInt(n/2)&&j==parseInt(n/2-1))||(i==parseInt(n/2)&&j==parseInt(n/2))){
-                        casa.setAttribute('class', `casa branco`);
-                        peca.setAttribute('class', 'branco');
+                        casa.setAttribute('class', `casa white`);
+                        peca.setAttribute('class', 'peca branco');
                         casa.appendChild(peca);
                         casaC.push(0);
                     }else{
@@ -97,9 +97,9 @@ function construirCasas(n){
                 //casa.setAttribute('class', `casa`);
                 if(j%2==0){
                     if((i==parseInt(n/2)&&j==parseInt(n/2-1))||(i==parseInt(n/2)&&j==parseInt(n/2))){
-                        casa.setAttribute('class', `casa branco`);
+                        casa.setAttribute('class', `casa white`);
 
-                        peca.setAttribute('class', 'branco');
+                        peca.setAttribute('class', 'peca branco');
                         casa.appendChild(peca);
                         casaC.push(0);
                     }else{
@@ -110,9 +110,9 @@ function construirCasas(n){
                     }
                 }else{
                     if((i==parseInt(n/2)&&j==parseInt(n/2-1))||(i==parseInt(n/2)&&j==parseInt(n/2))){
-                        casa.setAttribute('class', `casa branco`);
+                        casa.setAttribute('class', `casa white`);
 
-                        peca.setAttribute('class', 'branco');
+                        peca.setAttribute('class', 'peca branco');
                         casa.appendChild(peca);
                         casaC.push(0);
                     }else{
@@ -389,8 +389,8 @@ function abstracaoJogadaValida1(a,b,c,d){
     if(c1==1 && c2==1 && c3==1){
         let casa = document.querySelector(`#casa${a}-${b}`);
         let peca = document.querySelector(`#casa${a}-${b}>div`)
-        casa.setAttribute('class', 'casa branco');
-        peca.setAttribute('class', 'branco');
+        casa.setAttribute('class', 'casa white');
+        peca.setAttribute('class', 'peca branco');
         let ifLinha = parseInt(a);
         let ifColuna = parseInt(b);
         linhaC[ifLinha][ifColuna] = 0;
@@ -416,8 +416,8 @@ function abstracaoJogadaValida1(a,b,c,d){
             // peca = document.querySelector(`#casa${a}-${ifColuna}>div`)
             casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
             peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
-            casa.setAttribute('class', 'casa branco');
-            peca.setAttribute('class', 'branco');
+            casa.setAttribute('class', 'casa white');
+            peca.setAttribute('class', 'peca branco');
             linhaC[forLinha][forColuna] = 0;
         }
         deQuemEAVez(jogador);
@@ -461,8 +461,8 @@ function abstracaoJogadaValida2(a,b,c,d){ // ( i==x && j>y )
     if(c1==1 && c2==1 && c3==1){
         let casa = document.querySelector(`#casa${a}-${b}`);
         let peca = document.querySelector(`#casa${a}-${b}>div`);
-        casa.setAttribute('class', 'casa branco');
-        peca.setAttribute('class', 'branco');
+        casa.setAttribute('class', 'casa white');
+        peca.setAttribute('class', 'peca branco');
         let ifLinha = parseInt(a);
         let ifColuna = parseInt(b);
         linhaC[ifLinha][ifColuna] = 0;
@@ -488,8 +488,8 @@ function abstracaoJogadaValida2(a,b,c,d){ // ( i==x && j>y )
             // peca = document.querySelector(`#casa${ifLinha}-${b}>div`);
             casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
             peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
-            casa.setAttribute('class', 'casa branco');
-            peca.setAttribute('class', 'branco');
+            casa.setAttribute('class', 'casa white');
+            peca.setAttribute('class', 'peca branco');
             linhaC[forLinha][forColuna] = 0;
         }
         deQuemEAVez(jogador);
@@ -533,8 +533,8 @@ function abstracaoJogadaValida3(a,b,c,d){
         if(c1==1 && c2==1 && c3==1){
             let casa = document.querySelector(`#casa${a}-${b}`);
             let peca = document.querySelector(`#casa${a}-${b}>div`)
-            casa.setAttribute('class', 'casa branco');
-            peca.setAttribute('class', 'branco');
+            casa.setAttribute('class', 'casa white');
+            peca.setAttribute('class', 'peca branco');
             let ifLinha = parseInt(a);
             let ifColuna = parseInt(b);
             linhaC[ifLinha][ifColuna] = 0;
@@ -558,8 +558,8 @@ function abstracaoJogadaValida3(a,b,c,d){
                 let forLinha = parseInt(m)+parseInt(a);
                 casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
                 peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`)
-                casa.setAttribute('class', 'casa branco');
-                peca.setAttribute('class', 'branco');
+                casa.setAttribute('class', 'casa white');
+                peca.setAttribute('class', 'peca branco');
                 linhaC[forLinha][forColuna] = 0;
             }
             deQuemEAVez(jogador);
@@ -605,8 +605,8 @@ function abstracaoJogadaValida4(a,b,c,d){
         if(c1==1 && c2==1 && c3==1){
             let casa = document.querySelector(`#casa${a}-${b}`);
             let peca = document.querySelector(`#casa${a}-${b}>div`);
-            casa.setAttribute('class', 'casa branco');
-            peca.setAttribute('class', 'branco');
+            casa.setAttribute('class', 'casa white');
+            peca.setAttribute('class', 'peca branco');
             let ifLinha = parseInt(a);
             let ifColuna = parseInt(b);
             linhaC[ifLinha][ifColuna] = 0;
@@ -630,8 +630,8 @@ function abstracaoJogadaValida4(a,b,c,d){
                 let forColuna = parseInt(b);
                 casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
                 peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
-                casa.setAttribute('class', 'casa branco');
-                peca.setAttribute('class', 'branco');
+                casa.setAttribute('class', 'casa white');
+                peca.setAttribute('class', 'peca branco');
                 linhaC[forLinha][forColuna] = 0;
 
 
