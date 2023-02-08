@@ -1,11 +1,11 @@
 const dimensoes = document.querySelector('#dimensoes');
 const restart = document.querySelector('#restart');
 
-let jogador = 0;
+let jogador = 1
 let corAliada = 'azul';
 let corInimiga = 'vermelha';
 let linhaC = [], casaC = [];
-
+let indiceClick1=[];
 
 restart.addEventListener('click', ()=>{
     excluirCasas();
@@ -30,7 +30,8 @@ restart.addEventListener('click', ()=>{
 
 window.addEventListener('load', () =>{
     construirCasas(6);
-    doisCliques();
+    const mensagem = document.querySelector('#mensagem>p');
+    mensagem.innerHTML = "É a vez da cor azul!";
 });
 
 dimensoes.addEventListener('change', () =>{
@@ -50,7 +51,8 @@ dimensoes.addEventListener('change', () =>{
         construirCasas(4);
         document.querySelector('#dimensoes').setAttribute('value', 4);
     }
-    doisCliques();
+    const mensagem = document.querySelector('#mensagem>p');
+    mensagem.innerHTML = "É a vez da cor azul!";
 });
 
 
@@ -142,6 +144,7 @@ function construirCasas(n){
 
     tabuleiro.appendChild(conglomerado);
     console.log(linhaC);
+    doisCliques();
 }
 
 function excluirCasas(){
@@ -150,19 +153,20 @@ function excluirCasas(){
     tabuleiro.removeChild(conglomerado);
     casasOcupadas = [];
 }
-
+// jogador == 0 ? deQuemEAVez(1): deQuemEAVez(0);
+//jogador começa com 0
 function deQuemEAVez(n){
     const mensagem = document.querySelector('#mensagem>p');
     if(n === 1){
         mensagem.innerHTML = "É a vez da cor vermelha!";
-        jogador = 1;
         corAliada = 'vermelha';
         corInimiga = 'azul';
+        jogador = 0;
     }else{
         mensagem.innerHTML = "É a vez da cor azul!";
-        jogador = 0;
         corAliada = 'azul';
         corInimiga = 'vermelha';
+        jogador = 1;
     }
 }
 
@@ -266,39 +270,64 @@ function setID(indice){
 
 
 function doisCliques(){
-    let a=-1,b=-1;
+    let a=false;
     const largura = parseInt(document.querySelector("#dimensoes").value);
     for(i = 0;i<largura;i++){
         for(j = 0; j<largura; j++){
             const casa = document.querySelector(`#casa${i}-${j}`);
 
-            casa.addEventListener('click', ()=>{
-
-                let casaAssist = casa.getAttribute('id');
-                let indiceOrigem = getID(casaAssist);
-                a = indiceOrigem[0];
-                b = indiceOrigem[1];
-                console.log(a,b)
-                if(a > -1 && b > -1){
-                    for(x = 0 ; x < largura ; x++){
-                        for(y = 0 ; y < largura ; y++){
-                            const peca = document.querySelector(`#casa${x}-${y}`)
-                            peca.addEventListener('click',()=>{
-                                let pecaAssist = peca.getAttribute('id');
-                                let indiceDestino = getID(pecaAssist);
-                                jogadaValida(indiceOrigem[0],indiceOrigem[1], indiceDestino[0], indiceDestino[1]);
-                                console.log(indiceDestino)
-                            });
-
-                        }
+                casa.addEventListener('click', (event)=>{
+                    if(a==false){
+                        let casaAssist = casa.getAttribute('id');
+                        let indiceOrigem = getID(casaAssist);
+                        let a0 = indiceOrigem[0];
+                        let b0 = indiceOrigem[1];
+                        primeiroClick(a0, b0);
+                        a=true;
+                    }else if(a==true){
+                        let casaAssist = casa.getAttribute('id');
+                        let indiceOrigem = getID(casaAssist);
+                        let a0 = indiceOrigem[0];
+                        let b0 = indiceOrigem[1];
+                        segundoClick(a0, b0);
+                        a=false;
                     }
-                }
-            });
+                });
         }
     }
 
 }
+function primeiroClick(i, j){
+    indiceClick1 = [i, j];
+    console.log('Primeiro Click'+indiceClick1);
+}
+function segundoClick(x, y){
+    jogadaValida(indiceClick1[0], indiceClick1[1], x, y);
+    indiceClick1 = [];
+    console.log('Segundo Click'+x+y)
+}
 
+// function jogada(a, b, largura){
+//                     console.log(a,b)
+//                     if(a > -1 && b > -1){
+//                         for(x = 0 ; x < largura ; x++){
+//                             for(y = 0 ; y < largura ; y++){
+//                                 let forLinha = parseInt(x);
+//                                 let forColuna = parseInt(y);
+//                                 const peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`)
+//                                 peca.addEventListener('click',(event)=>{
+//                                     console.log('click 2')
+//                                     let pecaAssist = peca.getAttribute('id');
+//                                     let indiceDestino = getID(pecaAssist);
+//                                     jogadaValida(a,b, indiceDestino[0], indiceDestino[1]);
+//                                     console.log(indiceDestino);
+//                                     event.stopPropagation();
+//                                 });
+
+//                             }
+//                         }
+//                     }
+// }
 
 function clicaArrasta(){
     for(i = 0;i<largura;i++){
@@ -316,109 +345,303 @@ function clicaArrasta(){
 function jogadaValida(i, j, x, y){
     console.log('entrou na funcao');
     if( i==x && j<y ){
-        abstracaoJogadaValida(i, j, x, y);
+        abstracaoJogadaValida1(i, j, x, y);
     }
     if( i==x && j>y ){
-        abstracaoJogadaValida(i, y , x, j);
+        abstracaoJogadaValida2(i, j , x, y);
     }
     if( i<x && j==y){
-        abstracaoJogadaValida1(x, j, i, y);
+        abstracaoJogadaValida3(i, j, x, y);
     }
     if( i>x && j==y){
-        abstracaoJogadaValida1(i,j,x, y);
+        abstracaoJogadaValida4(i,j,x, y);
     }
-}
-function abstracaoJogadaValida(a,b,c,d){
-    if( a==c && b<d ){
-        let c1, c2, c3;
-        (d-b)%2!=0 ? c1 = 0 : c1 = 1;
-
-        for(let m = 1; m<(d-b); m = m+2){
-            console.log(linhaC[0,0])
-            const casa = document.querySelector(`#casa${a}-${m+b}>div`);
-            if(corInimiga == "vermelha"){
-                if(casa.getAttribute(`class`)=='vermelha'){
-                    c2 = 1;
-                }else{
-                    break;
-                }
-            }else{
-                if(casa.getAttribute(`class`)=='azul'){
-                    c2 = 1;
-                }else{
-                    break;
-                }
-            }
-        }
-        for(let m = 0; m<(d-b); m = m+2){
-            const casa = document.querySelector(`#casa${a}-${m+b}`);
-            casa.classList.contains(`branco`) ? c3 = 1 : m=d;
-        }
-        if(c1==1 && c2==1 && c3==1){
-            const casa = document.querySelector(`#casa${a}-${b}`);
-            casa.setAttribute('class', 'branco');
-            casa = document.querySelector(`#casa${c}-${d}`);
-            if(corAliada == "azul"){
-                casa.setAttribute('class', `blue`);
-            }else{
-                casa.setAttribute('class', `red`);
-            }
-
-            for(let m = 1; m<(d-b); m = m+2){
-                casa = document.querySelector(`#casa${a}-${m+b}`);
-                casa.setAttribute('class', 'branco');
-            }
-            jogador == 0 ? deQuemEAVez(1): deQuemEAVez(0);
-        }
-
-    }
+    console.log(linhaC)
 }
 function abstracaoJogadaValida1(a,b,c,d){
+
+    let c1, c2, c3;
+    (d-b)%2!=0 ? c1 = 0 : c1 = 1;
+
+    for(let m = 1; m<=(d-b); m = m+2){
+        let forLinha= parseInt(a);
+        let forColuna = parseInt(m)+parseInt(b);
+        if(corInimiga == "vermelha"){
+            if(linhaC[forLinha][forColuna]==2){
+                c2 = 1;
+            }else{
+                break;
+            }
+        }else{
+            if(linhaC[forLinha][forColuna]==1){
+                c2 = 1;
+            }else{
+                break;
+            }
+        }
+    }
+
+    for(let m = 2; m<=(d-b); m = m+2){
+        let forLinha = parseInt(a);
+        let forColuna = parseInt(m)+parseInt(b);
+        if(linhaC[forLinha][forColuna]==0){
+            c3 =1;
+        }else{
+            break;
+        }
+    }
+    if(c1==1 && c2==1 && c3==1){
+        let casa = document.querySelector(`#casa${a}-${b}`);
+        let peca = document.querySelector(`#casa${a}-${b}>div`)
+        casa.setAttribute('class', 'casa branco');
+        peca.setAttribute('class', 'branco');
+        let ifLinha = parseInt(a);
+        let ifColuna = parseInt(b);
+        linhaC[ifLinha][ifColuna] = 0;
+
+        casa = document.querySelector(`#casa${c}-${d}`);
+        peca = document.querySelector(`#casa${c}-${d}>div`);
+        ifLinha = parseInt(c);
+        ifColuna = parseInt(d);
+        if(corAliada == "azul"){
+            casa.setAttribute('class', `casa blue`);
+            peca.setAttribute('class', 'azul');
+            linhaC[ifLinha][ifColuna] = 1;
+        }else{
+            casa.setAttribute('class', `casa red`);
+            peca.setAttribute('class', 'vermelha');
+            linhaC[ifLinha][ifColuna] = 2;
+        }
+
+        for(let m = 1; m<(d-b); m = m+2){
+            let forLinha = parseInt(a);
+            let forColuna = parseInt(m)+parseInt(b);
+            // casa = document.querySelector(`#casa${a}-${ifColuna}`);
+            // peca = document.querySelector(`#casa${a}-${ifColuna}>div`)
+            casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
+            peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
+            casa.setAttribute('class', 'casa branco');
+            peca.setAttribute('class', 'branco');
+            linhaC[forLinha][forColuna] = 0;
+        }
+        deQuemEAVez(jogador);
+    }
+
+
+}
+function abstracaoJogadaValida2(a,b,c,d){ // ( i==x && j>y )
+
+    let c1, c2, c3;
+    (b-d)%2!=0 ? c1 = 0 : c1 = 1;
+
+    for(let m = -1 ; m > (d-b) ; m = m-2 ){
+        let forLinha= parseInt(a);
+        let forColuna = parseInt(b)-(parseInt(m)*-1);
+        if(corInimiga == "vermelha"){
+            if(linhaC[forLinha][forColuna]==2){
+                c2 = 1;
+            }else{
+                break;
+            }
+        }else{
+            if(linhaC[forLinha][forColuna]){
+                c2 = 1;
+            }else{
+                break;
+            }
+        }
+    }
+    for(let m = -2; m>=(d-b); m = m-2){
+        let forLinha= parseInt(a);
+        let forColuna = parseInt(b)-(parseInt(m)*-1);
+        if(linhaC[forLinha][forColuna]==0){
+            c3 = 1;
+        }else{
+            break;
+        }
+    }
+    console.log(c1, c2, c3)
+    if(c1==1 && c2==1 && c3==1){
+        let casa = document.querySelector(`#casa${a}-${b}`);
+        let peca = document.querySelector(`#casa${a}-${b}>div`);
+        casa.setAttribute('class', 'casa branco');
+        peca.setAttribute('class', 'branco');
+        let ifLinha = parseInt(a);
+        let ifColuna = parseInt(b);
+        linhaC[ifLinha][ifColuna] = 0;
+        casa = document.querySelector(`#casa${c}-${d}`);
+        peca = document.querySelector(`#casa${c}-${d}>div`);
+        ifLinha = parseInt(c);
+        ifColuna = parseInt(d);
+
+        if(corAliada == "azul"){
+            casa.setAttribute('class', `casa blue`);
+            peca.setAttribute('class', 'azul');
+            linhaC[ifLinha][ifColuna] = 1;
+        }else{
+            casa.setAttribute('class', `casa red`);
+            peca.setAttribute('class', 'vermelha');
+            linhaC[ifLinha][ifColuna] = 2;
+        }
+
+        for(let m = -1 ; m > (d-b) ; m = m-2 ){
+            let forLinha= parseInt(a);
+            let forColuna = parseInt(b)-(parseInt(m)*-1);
+            // casa = document.querySelector(`#casa${ifLinha}-${b}`);
+            // peca = document.querySelector(`#casa${ifLinha}-${b}>div`);
+            casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
+            peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
+            casa.setAttribute('class', 'casa branco');
+            peca.setAttribute('class', 'branco');
+            linhaC[forLinha][forColuna] = 0;
+        }
+        deQuemEAVez(jogador);
+    }
+
+
+}
+
+function abstracaoJogadaValida3(a,b,c,d){
+    if( a<c && b==d ){
+        let c1, c2, c3;
+        (c-a)%2!=0 ? c1 = 0 : c1 = 1;
+
+        for(let m = 1; m<=(c-a); m = m+2){
+            let forColuna= parseInt(b);
+            let forLinha = parseInt(m)+parseInt(a);
+            if(corInimiga == "vermelha"){
+                if(linhaC[forLinha][forColuna]==2){
+                    c2 = 1;
+                }else{
+                    break;
+                }
+            }else{
+                if(linhaC[forLinha][forColuna]==1){
+                    c2 = 1;
+                }else{
+                    break;
+                }
+            }
+        }
+        for(let m = 2; m<=(c-a); m = m+2){
+            let forColuna = parseInt(b);
+            let forLinha = parseInt(m)+parseInt(a);
+            if(linhaC[forLinha][forColuna]==0){
+                c3 =1;
+            }else{
+                break;
+            }
+        }
+        if(c1==1 && c2==1 && c3==1){
+            let casa = document.querySelector(`#casa${a}-${b}`);
+            let peca = document.querySelector(`#casa${a}-${b}>div`)
+            casa.setAttribute('class', 'casa branco');
+            peca.setAttribute('class', 'branco');
+            let ifLinha = parseInt(a);
+            let ifColuna = parseInt(b);
+            linhaC[ifLinha][ifColuna] = 0;
+
+            casa = document.querySelector(`#casa${c}-${d}`);
+            peca = document.querySelector(`#casa${c}-${d}>div`);
+            ifLinha = parseInt(c);
+            ifColuna = parseInt(d);
+            if(corAliada == "azul"){
+                casa.setAttribute('class', `casa blue`);
+                peca.setAttribute('class', 'azul');
+                linhaC[ifLinha][ifColuna] = 1;
+            }else{
+                casa.setAttribute('class', `casa red`);
+                peca.setAttribute('class', 'vermelha');
+                linhaC[ifLinha][ifColuna] = 2;
+            }
+
+            for(let m = 1; m<(c-a); m = m+2){
+                let forColuna = parseInt(b);
+                let forLinha = parseInt(m)+parseInt(a);
+                casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
+                peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`)
+                casa.setAttribute('class', 'casa branco');
+                peca.setAttribute('class', 'branco');
+                linhaC[forLinha][forColuna] = 0;
+            }
+            deQuemEAVez(jogador);
+        }
+
+    }
+}
+function abstracaoJogadaValida4(a,b,c,d){
     if( a>c && b==d ){
         let c1, c2, c3;
         (a-c)%2!=0 ? c1 = 0 : c1 = 1;
 
-        for(let m = 1; m<(a-c); m = m+2){
-            const casa = document.querySelector(`#casa${c+m}-${b}>div`);
-            console.log(casa.getAttribute('class'));
+        for(let m = -1; m>(c-a); m = m-2){
+            let forLinha = parseInt(a)-(parseInt(m)*-1);
+            let forColuna = parseInt(b);
             if(corInimiga == "vermelha"){
-                if(casa.getAttribute(`class`)=='vermelha'){
+                if(linhaC[forLinha][forColuna]==2){
                     c2 = 1;
                 }else{
                     break;
                 }
             }else{
-                if(casa.getAttribute(`class`)=='azul'){
+                if(linhaC[forLinha][forColuna]==1){
                     c2 = 1;
                 }else{
                     break;
                 }
             }
         }
-        for(let m = 0; m<(a-c); m = m+2){
-            const casa = document.querySelector(`#casa${c+m}-${b}`);
-            casa.classList.contains(`branco`) ? c3 = 1 : m=a;
-        }
-        if(c1==1 && c2==1 && c3==1){
-            const casa = document.querySelector(`#casa${a}-${b}`);
-            casa.setAttribute('class', 'branco');
-            casa = document.querySelector(`#casa${c}-${d}`);
-            if(corAliada == "azul"){
-                casa.setAttribute('class', `blue`);
+        for(let m = -2; m>=(c-a); m = m-2){
+            console.log('verifica c3')
+            let forLinha = parseInt(a)-(parseInt(m)*-1);
+            let forColuna = parseInt(b);
+            console.log(linhaC[forLinha][forColuna]==0)
+            if(linhaC[forLinha][forColuna]==0){
+                c3 = 1;
             }else{
-                casa.setAttribute('class', `red`);
+                break;
+            }
+        }
+        console.log(c1, c2, c3);
+        if(c1==1 && c2==1 && c3==1){
+            let casa = document.querySelector(`#casa${a}-${b}`);
+            let peca = document.querySelector(`#casa${a}-${b}>div`);
+            casa.setAttribute('class', 'casa branco');
+            peca.setAttribute('class', 'branco');
+            let ifLinha = parseInt(a);
+            let ifColuna = parseInt(b);
+            linhaC[ifLinha][ifColuna] = 0;
+            casa = document.querySelector(`#casa${c}-${d}`);
+            peca = document.querySelector(`#casa${c}-${d}>div`);
+            ifLinha = parseInt(c);
+            ifColuna = parseInt(d);
+
+            if(corAliada == "azul"){
+                casa.setAttribute('class', `casa blue`);
+                peca.setAttribute('class', 'azul');
+                linhaC[ifLinha][ifColuna] = 1;
+            }else{
+                casa.setAttribute('class', `casa red`);
+                peca.setAttribute('class', 'vermelha');
+                linhaC[ifLinha][ifColuna] = 2;
             }
 
-            for(let m = 1; m<(a-c); m = m+2){
-                casa = document.querySelector(`#casa${c+m}-${b}`);
-                casa.setAttribute('class', 'branco');
+            for(let m = -1; m>(c-a); m = m-2){
+                let forLinha = parseInt(a)-(parseInt(m)*-1);
+                let forColuna = parseInt(b);
+                casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
+                peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
+                casa.setAttribute('class', 'casa branco');
+                peca.setAttribute('class', 'branco');
+                linhaC[forLinha][forColuna] = 0;
+
+
             }
-            jogador == 0 ? deQuemEAVez(1): deQuemEAVez(0);
+            deQuemEAVez(jogador);
         }
 
     }
 }
-
 
 
 
