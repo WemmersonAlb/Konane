@@ -19,11 +19,6 @@ restart.addEventListener('click', ()=>{
     document.querySelector('#dimensoes').value = `${largura}`;
     jogador = 1;
     deQuemEAVez(jogador);
-    jogador = 0;
-    redNumber = 0;
-    red.innerHTML = `${redNumber}`;
-    blueNumber = 0;
-    blue.innerHTML = `${blueNumber}`;
 })
 
 
@@ -36,13 +31,9 @@ window.addEventListener('load', () =>{
 
 dimensoes.addEventListener('change', () =>{
     excluirCasas();
-    jogador = 1;
-    deQuemEAVez(jogador);
+    //jogador = 1;
     jogador = 0;
-    redNumber = 0;
-    red.innerHTML = `${redNumber}`;
-    blueNumber = 0;
-    blue.innerHTML = `${blueNumber}`;
+    deQuemEAVez(jogador);
     const largura = parseInt(document.querySelector('#dimensoes').value);
 
     if(largura>=4){
@@ -143,7 +134,7 @@ function construirCasas(n){
     }
 
     tabuleiro.appendChild(conglomerado);
-    console.log(linhaC);
+    console.log(linhaC.length);
     doisCliques();
 }
 
@@ -152,6 +143,8 @@ function excluirCasas(){
     const conglomerado = document.querySelector('#conglomerado');
     tabuleiro.removeChild(conglomerado);
     casasOcupadas = [];
+    linhaC= [];
+    casaC=[];
 }
 // jogador == 0 ? deQuemEAVez(1): deQuemEAVez(0);
 //jogador começa com 0
@@ -282,6 +275,7 @@ function doisCliques(){
                         let indiceOrigem = getID(casaAssist);
                         let a0 = indiceOrigem[0];
                         let b0 = indiceOrigem[1];
+                        casa.style = 'background-color: rgba(100, 100, 100, 0.7)'
                         primeiroClick(a0, b0);
                         a=true;
                     }else if(a==true){
@@ -302,6 +296,8 @@ function primeiroClick(i, j){
     console.log('Primeiro Click'+indiceClick1);
 }
 function segundoClick(x, y){
+    const casa = setID(indiceClick1);
+    casa.style = 'background-color: rgba(100, 100, 100, 0)';
     jogadaValida(indiceClick1[0], indiceClick1[1], x, y);
     indiceClick1 = [];
     console.log('Segundo Click'+x+y)
@@ -425,6 +421,7 @@ function abstracaoJogadaValida1(a,b,c,d){
             linhaC[forLinha][forColuna] = 0;
         }
         deQuemEAVez(jogador);
+        endGame();
     }
 
 
@@ -496,6 +493,7 @@ function abstracaoJogadaValida2(a,b,c,d){ // ( i==x && j>y )
             linhaC[forLinha][forColuna] = 0;
         }
         deQuemEAVez(jogador);
+        endGame();
     }
 
 
@@ -565,6 +563,7 @@ function abstracaoJogadaValida3(a,b,c,d){
                 linhaC[forLinha][forColuna] = 0;
             }
             deQuemEAVez(jogador);
+            endGame();
         }
 
     }
@@ -638,11 +637,76 @@ function abstracaoJogadaValida4(a,b,c,d){
 
             }
             deQuemEAVez(jogador);
+            endGame();
         }
 
     }
 }
 
+function endGame(){
+    let azulJoga = 0;
+    let vermelhoJoga = 0;
+    for(let i = 0;i<linhaC.length;i++){
+        for(let j = 0; j<linhaC.length;j++){
+            if(corAliada=="azul"){
+                if((j+2)<linhaC.length){
+                    if(linhaC[i][j] == 1 && linhaC[i][j+1] == 2 && linhaC[i][j+2]==0){
+                        azulJoga = 1;
+                    }
+                }
+                if((j-2)>=0){
+                    if(linhaC[i][j] == 1 && linhaC[i][j-1] == 2 && linhaC[i][j-2]==0){
+                        azulJoga = 1;
+
+                    }
+                }
+                if((i+2)<linhaC.length){
+                    if(linhaC[i][j] == 1 && linhaC[i+1][j] == 2 && linhaC[i+2][j]==0){
+                        azulJoga = 1;
+
+                    }
+                }
+                if((i-2)>=0){
+                    if(linhaC[i][j] == 1 && linhaC[i-1][j] == 2 && linhaC[i-2][j]==0){
+                        azulJoga = 1;
+
+                    }
+                }
+            }else{
+                if((j+2)<linhaC.length){
+                    if(linhaC[i][j] == 2 && linhaC[i][j+1] == 1 && linhaC[i][j+2]==0){
+                        vermelhoJoga = 1;
+
+                    }
+                }
+                if((j-2)>=0){
+                    if(linhaC[i][j] == 2 && linhaC[i][j-1] == 1 && linhaC[i][j-2]==0){
+                        vermelhoJoga = 1;
+
+                    }
+                }
+                if((i+2)<linhaC.length){
+                    if(linhaC[i][j] == 2 && linhaC[i+1][j] == 1 && linhaC[i+2][j]==0){
+                        vermelhoJoga = 1;
+
+                    }
+                }
+                if((i-2)>=0){
+                    if(linhaC[i][j] == 2 && linhaC[i-1][j] == 1 && linhaC[i-2][j]==0){
+                        vermelhoJoga = 1;
+
+                    }
+                }
+            }
+        }
+    }
+    const mensagem = document.querySelector("#mensagem>p");
+    if(corAliada == 'azul'&&azulJoga==0){
+        mensagem.innerHTML = 'A cor vermelha saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
+    }else if(corAliada == 'vermelha'&&vermelhoJoga == 0){
+        mensagem.innerHTML = 'A cor azul saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
+    }
+}
 
 
 
