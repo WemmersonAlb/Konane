@@ -1,6 +1,5 @@
-# Catch :video_game:
-Catch é um jogo de tabuleiro desenvolvido por Reiner Knizia em 1995. Ele é um jogo de estratégia para dois jogadores. Originalmente ele é jogado em um tabuleiro de 8 × 8. Cada jogador será representado por uma cor. O primeiro jogador deve preencher duas casas na horizontal e o segundo, duas casas na vertical, de forma alternada. Quando uma área contendo 1, 2, ou 3 casas estiver cercada, elas serão marcadas com um 'X' na cor do jogador corrente. Ao final, contamos a quantidade
-de 'X' de cada jogador; quem possuir mais ganha.
+# Konane :video_game:
+. K¯onane é um jogo de tabuleiro e estratégia para dois jogadores. Ele é jogado em um tabuleiro retangular onde as peças dos jogadores são posicionadas de forma alternada, exceto duas posições centrais. Cada jogador será representado por uma cor e, alternadamente, move uma peça sua. Uma peça pode ser movimentada desde que esteja adjacente (na horizontal ou vertical mas não na diagonal) a outra peça adversária e possa saltar por cima desta ficando na casa imediatamente a seguir (que tem de estar desocupada). A peça saltada é capturada e removida do tabuleiro (à semelhança das Damas). Isto significa que devem ocorrer capturas em todos os lances de uma partida de K¯onane. Após uma captura, a peça movimentada pode, opcionalmente e se houver essa possibilidade, continuar a capturar peças adversárias desde que o faça no mesmo sentido (ou seja, não pode alterar a direção da captura no meio da jogada). Ganha o jogador que realizar a última jogada.
 
 Este código foi desenvolvido como resposta de uma atividade da disciplica de Desenvolvimento WEB 1 do curso de Análise e Desenvolvimento de Sistemas - IFPE, que é ministrada pelo professor Paulo Gonçalves.
 
