@@ -2,6 +2,9 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    color:black;
+    font-weight: 600;
+    background-color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .linhas{
@@ -16,21 +19,49 @@ main{
 h1{
     text-align: center;
 }
-
-/* .red, .blue{
-    font-size: 2rem;
-    font-weight: 900;
-    text-align: center;
+header{
+    display: flex;
+    align-items: center;
 }
-.red{
-    color: red;
-    border-radius: 50%;
+img{
+    width: 30px;
+    margin-left: 0.5rem;
+    cursor: pointer;
 }
 
-.blue{
-    color:blue;
+
+/*Esquema de cores*/
+
+/*Escuro*/
+.preto{
+    background-color: rgb(31, 30, 30);
+    transition: 1s;
+    opacity: 0;
+}
+.black{
+    background-color: rgb(31, 30, 30);
+    transition: 1s;
+    opacity: 1;
+}
+.roxa, .verde{
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-} */
+    transition: 0.7s;
+    opacity: 1;
+}
+.roxa{
+    border: 5px solid #E122D8;
+    background-color: rgba(225, 34, 216, 0.3);
+}
+.verde{
+    border: 5px solid #4de122;
+    background-color: rgba(77, 225, 34, 0.3);
+}
+
+
+
+/*claro*/
 .branco{
     background-color: white;
     transition: 1s;
@@ -48,22 +79,32 @@ h1{
     transition: 0.7s;
     opacity: 1;
 }
+.vermelha{
+    border: 5px solid red;
+    background-color: rgba(255, 0, 0, 0.267);
+}
+.azul{
+    border: 5px solid blue;
+    background-color: rgba(0, 0, 255, 0.267);
+}
+
+
+
+/*geral*/
 .peca{
     width: 46px;
     height: 46px;
     border-radius: 50%;
 }
-.vermelha{
-    background-color: red;
-}
-.azul{
-    background-color: blue;
-}
 .casa{
     width: 50px;
     height: 50px;
-    border: 2px solid black;
+    border: 2px solid rgb(138, 132, 132);
     margin: 5px;
+}
+
+button#alterna-tema{
+    cursor: pointer;
 }
 body{
     max-width: 95%;
@@ -88,24 +129,4 @@ input,label{
 #restart{
     padding-left: 5px;
     padding-right: 5px;
-}
-#placar{
-    display: flex;
-    justify-content: center;
-}
-th, td{
-    width:100px;
-    text-align: center;
-    border-bottom: 1px solid black;
-}
-th{
-    border-top: 1px solid black;
-}
-th:first-child, td:first-child{
-    color:red;
-    font-weight: 900;
-}
-th:last-child, td:last-child{
-    color:blue;
-    font-weight: 900;
 }

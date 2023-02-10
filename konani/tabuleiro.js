@@ -7,12 +7,28 @@ Data de entrega: 08/02/2023
 */
 const dimensoes = document.querySelector('#dimensoes');
 const restart = document.querySelector('#restart');
+const alternador = document.querySelector('#img');
+
 
 let jogador = 1;
 let corAliada = 'azul';
 let corInimiga = 'vermelha';
 let linhaC = [], casaC = [];
 let indiceClick1=[];
+let tema = 'claro'
+
+alternador.addEventListener('click', ()=>{
+    if(tema == 'claro'){
+        document.body.style = 'background-color: rgb(31, 30, 30);'
+        document.body.style= 'color: white';
+        tema = 'escuro';
+    }else{
+        document.body.style = 'background-color: white;'
+        document.body.style= 'color: black';
+        tema='claro';
+    }
+});
+
 
 restart.addEventListener('click', ()=>{
     excluirCasas();
@@ -33,7 +49,11 @@ restart.addEventListener('click', ()=>{
 window.addEventListener('load', () =>{
     construirCasas(6);
     const mensagem = document.querySelector('#mensagem>p');
-    mensagem.innerHTML = "É a vez da cor azul!";
+    if(tema == 'claro'){
+        mensagem.innerHTML = "É a vez da cor Azul!";
+    }else{
+        mensagem.innerHTML = "É a vez da cor Verde!";
+    }
 });
 
 dimensoes.addEventListener('change', () =>{
@@ -50,7 +70,7 @@ dimensoes.addEventListener('change', () =>{
         document.querySelector('#dimensoes').setAttribute('value', 4);
     }
     const mensagem = document.querySelector('#mensagem>p');
-    mensagem.innerHTML = "É a vez da cor azul!";
+    mensagem.innerHTML = "É a vez da cor Verde!";
 });
 
 
@@ -68,25 +88,45 @@ function construirCasas(n){
                 let peca = document.createElement('div');
                 if(j%2==0){
                     if((i==parseInt(n/2)&&j==parseInt(n/2-1))||(i==parseInt(n/2)&&j==parseInt(n/2))){
-                        casa.setAttribute('class', `casa white`);
-                        peca.setAttribute('class', 'peca branco');
+                        if(tema == 'claro'){
+                            casa.setAttribute('class', `casa white`);
+                            peca.setAttribute('class', 'peca branco');
+                        }else{
+                            casa.setAttribute('class', `casa black`);
+                            peca.setAttribute('class', 'peca preto');
+                        }   
                         casa.appendChild(peca);
                         casaC.push(0);
                     }else{
-                        casa.setAttribute('class', `casa red`);
-                        peca.setAttribute('class', 'vermelha');
+                        if(tema == 'claro'){
+                            casa.setAttribute('class', `casa red`);
+                            peca.setAttribute('class', 'peca vermelha');
+                        }else{
+                            casa.setAttribute('class', `casa purple`);
+                            peca.setAttribute('class', 'peca roxa');
+                        }
                         casa.appendChild(peca);
                         casaC.push(2);
                     }
                 }else{
                     if((i==parseInt(n/2)&&j==parseInt(n/2-1))||(i==parseInt(n/2)&&j==parseInt(n/2))){
-                        casa.setAttribute('class', `casa white`);
-                        peca.setAttribute('class', 'peca branco');
+                        if(tema == 'claro'){
+                            casa.setAttribute('class', `casa white`);
+                            peca.setAttribute('class', 'peca branco');
+                        }else{
+                            casa.setAttribute('class', `casa black`);
+                            peca.setAttribute('class', 'peca preto');
+                        }
                         casa.appendChild(peca);
                         casaC.push(0);
                     }else{
-                        casa.setAttribute('class', `casa blue`);
-                        peca.setAttribute('class', 'azul');
+                        if(tema == 'claro'){
+                            casa.setAttribute('class', `casa blue`);
+                            peca.setAttribute('class', 'peca azul');
+                        }else{
+                            casa.setAttribute('class', `casa green`);
+                            peca.setAttribute('class', 'peca verde');
+                        }
                         casa.appendChild(peca);
                         casaC.push(1);
 
@@ -102,27 +142,45 @@ function construirCasas(n){
                 let peca = document.createElement('div');
                 if(j%2==0){
                     if((i==parseInt(n/2)&&j==parseInt(n/2-1))||(i==parseInt(n/2)&&j==parseInt(n/2))){
-                        casa.setAttribute('class', `casa white`);
-
-                        peca.setAttribute('class', 'peca branco');
+                        if(tema == 'claro'){
+                            casa.setAttribute('class', `casa white`);
+                            peca.setAttribute('class', 'peca branco');
+                        }else{
+                            casa.setAttribute('class', `casa black`);
+                            peca.setAttribute('class', 'peca preto');
+                        }
                         casa.appendChild(peca);
                         casaC.push(0);
                     }else{
-                        casa.setAttribute('class', `casa blue`);
-                        peca.setAttribute('class', 'azul');
+                        if(tema == 'claro'){
+                            casa.setAttribute('class', `casa blue`);
+                            peca.setAttribute('class', 'peca azul');
+                        }else{
+                            casa.setAttribute('class', `casa green`);
+                            peca.setAttribute('class', 'peca verde');
+                        }
                         casa.appendChild(peca);
                         casaC.push(1);
                     }
                 }else{
                     if((i==parseInt(n/2)&&j==parseInt(n/2-1))||(i==parseInt(n/2)&&j==parseInt(n/2))){
-                        casa.setAttribute('class', `casa white`);
-
-                        peca.setAttribute('class', 'peca branco');
+                        if(tema == 'claro'){
+                            casa.setAttribute('class', `casa white`);
+                            peca.setAttribute('class', 'peca branco');
+                        }else{
+                            casa.setAttribute('class', `casa black`);
+                            peca.setAttribute('class', 'peca preto');
+                        }   
                         casa.appendChild(peca);
                         casaC.push(0);
                     }else{
-                        casa.setAttribute('class', `casa red`);
-                        peca.setAttribute('class', 'vermelha');
+                        if(tema == 'claro'){
+                            casa.setAttribute('class', `casa red`);
+                            peca.setAttribute('class', 'peca vermelha');
+                        }else{
+                            casa.setAttribute('class', `casa purple`);
+                            peca.setAttribute('class', 'peca roxa');
+                        }
                         casa.appendChild(peca);
                         casaC.push(2);
 
@@ -154,12 +212,26 @@ function excluirCasas(){
 function deQuemEAVez(n){
     const mensagem = document.querySelector('#mensagem>p');
     if(n === 1){
-        mensagem.innerHTML = "É a vez da cor vermelha!";
+        if(tema == 'claro'){
+            mensagem.innerHTML = "É a vez da cor Vermelha!";
+            mensagem.style.color='black;';
+            
+        }else{
+            mensagem.innerHTML = "É a vez da cor Roxa!";
+            mensagem.style.color='white;';
+        }
         corAliada = 'vermelha';
         corInimiga = 'azul';
         jogador = 0;
     }else{
-        mensagem.innerHTML = "É a vez da cor azul!";
+        if(tema == 'claro'){
+            mensagem.innerHTML = "É a vez da cor Azul!";
+            mensagem.style.color='black;';
+            
+        }else{
+            mensagem.innerHTML = "É a vez da cor Verde!";
+            mensagem.style.color='white;';
+        }
         corAliada = 'azul';
         corInimiga = 'vermelha';
         jogador = 1;
@@ -191,7 +263,7 @@ function doisCliques(){
                         let indiceOrigem = getID(casaAssist);
                         let a0 = indiceOrigem[0];
                         let b0 = indiceOrigem[1];
-                        casa.style = 'background-color: rgba(100, 100, 100, 0.7)'
+                        casa.style = 'background-color: rgba(225,48 , 34, 0.7)'
                         primeiroClick(a0, b0);
                         a=true;
                     }else if(a==true){
@@ -213,7 +285,7 @@ function primeiroClick(i, j){
 }
 function segundoClick(x, y){
     const casa = setID(indiceClick1);
-    casa.style = 'background-color: rgba(100, 100, 100, 0)';
+    casa.style = 'background-color: rgba(225, 48, 34, 0)';
     jogadaValida(indiceClick1[0], indiceClick1[1], x, y);
     indiceClick1 = [];
     console.log('Segundo Click'+x+y)
@@ -286,9 +358,14 @@ function abstracaoJogadaValida1(a,b,c,d){
     }
     if(c1==1 && c2==1 && c3==1){
         let casa = document.querySelector(`#casa${a}-${b}`);
-        let peca = document.querySelector(`#casa${a}-${b}>div`)
-        casa.setAttribute('class', 'casa white');
-        peca.setAttribute('class', 'peca branco');
+        let peca = document.querySelector(`#casa${a}-${b}>div`);
+        if(tema == 'claro'){
+            casa.setAttribute('class', `casa white`);
+            peca.setAttribute('class', 'peca branco');
+        }else{
+            casa.setAttribute('class', `casa black`);
+            peca.setAttribute('class', 'peca preto');
+        }
         let ifLinha = parseInt(a);
         let ifColuna = parseInt(b);
         linhaC[ifLinha][ifColuna] = 0;
@@ -298,10 +375,22 @@ function abstracaoJogadaValida1(a,b,c,d){
         ifLinha = parseInt(c);
         ifColuna = parseInt(d);
         if(corAliada == "azul"){
-            casa.setAttribute('class', `casa blue`);
-            peca.setAttribute('class', 'azul');
+            if(tema == 'claro'){
+                casa.setAttribute('class', `casa blue`);
+                peca.setAttribute('class', 'peca azul');
+            }else{
+                casa.setAttribute('class', `casa green`);
+                peca.setAttribute('class', 'peca verde');
+            }
             linhaC[ifLinha][ifColuna] = 1;
         }else{
+            if(tema == 'claro'){
+                casa.setAttribute('class', `casa red`);
+                peca.setAttribute('class', 'peca vermelha');
+            }else{
+                casa.setAttribute('class', `casa purple`);
+                peca.setAttribute('class', 'peca roxa');
+            }   
             casa.setAttribute('class', `casa red`);
             peca.setAttribute('class', 'vermelha');
             linhaC[ifLinha][ifColuna] = 2;
@@ -314,8 +403,13 @@ function abstracaoJogadaValida1(a,b,c,d){
             // peca = document.querySelector(`#casa${a}-${ifColuna}>div`)
             casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
             peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
-            casa.setAttribute('class', 'casa white');
-            peca.setAttribute('class', 'peca branco');
+            if(tema == 'claro'){
+                casa.setAttribute('class', `casa white`);
+                peca.setAttribute('class', 'peca branco');
+            }else{
+                casa.setAttribute('class', `casa black`);
+                peca.setAttribute('class', 'peca preto');
+            }   
             linhaC[forLinha][forColuna] = 0;
         }
         deQuemEAVez(jogador);
@@ -359,8 +453,13 @@ function abstracaoJogadaValida2(a,b,c,d){
     if(c1==1 && c2==1 && c3==1){
         let casa = document.querySelector(`#casa${a}-${b}`);
         let peca = document.querySelector(`#casa${a}-${b}>div`);
-        casa.setAttribute('class', 'casa white');
-        peca.setAttribute('class', 'peca branco');
+        if(tema == 'claro'){
+            casa.setAttribute('class', `casa white`);
+            peca.setAttribute('class', 'peca branco');
+        }else{
+            casa.setAttribute('class', `casa black`);
+            peca.setAttribute('class', 'peca preto');
+        }   
         let ifLinha = parseInt(a);
         let ifColuna = parseInt(b);
         linhaC[ifLinha][ifColuna] = 0;
@@ -370,12 +469,22 @@ function abstracaoJogadaValida2(a,b,c,d){
         ifColuna = parseInt(d);
 
         if(corAliada == "azul"){
-            casa.setAttribute('class', `casa blue`);
-            peca.setAttribute('class', 'azul');
+            if(tema == 'claro'){
+                casa.setAttribute('class', `casa blue`);
+                peca.setAttribute('class', 'peca azul');
+            }else{
+                casa.setAttribute('class', `casa green`);
+                peca.setAttribute('class', 'peca verde');
+            }
             linhaC[ifLinha][ifColuna] = 1;
         }else{
-            casa.setAttribute('class', `casa red`);
-            peca.setAttribute('class', 'vermelha');
+            if(tema == 'claro'){
+                casa.setAttribute('class', `casa red`);
+                peca.setAttribute('class', 'peca vermelha');
+            }else{
+                casa.setAttribute('class', `casa purple`);
+                peca.setAttribute('class', 'peca roxa');
+            }
             linhaC[ifLinha][ifColuna] = 2;
         }
 
@@ -386,8 +495,13 @@ function abstracaoJogadaValida2(a,b,c,d){
             // peca = document.querySelector(`#casa${ifLinha}-${b}>div`);
             casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
             peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
-            casa.setAttribute('class', 'casa white');
-            peca.setAttribute('class', 'peca branco');
+            if(tema == 'claro'){
+                casa.setAttribute('class', `casa white`);
+                peca.setAttribute('class', 'peca branco');
+            }else{
+                casa.setAttribute('class', `casa black`);
+                peca.setAttribute('class', 'peca preto');
+            }   
             linhaC[forLinha][forColuna] = 0;
         }
         deQuemEAVez(jogador);
@@ -430,8 +544,13 @@ function abstracaoJogadaValida3(a,b,c,d){
         if(c1==1 && c2==1 && c3==1){
             let casa = document.querySelector(`#casa${a}-${b}`);
             let peca = document.querySelector(`#casa${a}-${b}>div`)
-            casa.setAttribute('class', 'casa white');
-            peca.setAttribute('class', 'peca branco');
+            if(tema == 'claro'){
+                casa.setAttribute('class', `casa white`);
+                peca.setAttribute('class', 'peca branco');
+            }else{
+                casa.setAttribute('class', `casa black`);
+                peca.setAttribute('class', 'peca preto');
+            }   
             let ifLinha = parseInt(a);
             let ifColuna = parseInt(b);
             linhaC[ifLinha][ifColuna] = 0;
@@ -441,12 +560,22 @@ function abstracaoJogadaValida3(a,b,c,d){
             ifLinha = parseInt(c);
             ifColuna = parseInt(d);
             if(corAliada == "azul"){
-                casa.setAttribute('class', `casa blue`);
-                peca.setAttribute('class', 'azul');
+                if(tema == 'claro'){
+                    casa.setAttribute('class', `casa blue`);
+                    peca.setAttribute('class', 'peca azul');
+                }else{
+                    casa.setAttribute('class', `casa green`);
+                    peca.setAttribute('class', 'peca verde');
+                }   
                 linhaC[ifLinha][ifColuna] = 1;
             }else{
-                casa.setAttribute('class', `casa red`);
-                peca.setAttribute('class', 'vermelha');
+                if(tema == 'claro'){
+                    casa.setAttribute('class', `casa red`);
+                    peca.setAttribute('class', 'peca vermelha');
+                }else{
+                    casa.setAttribute('class', `casa purple`);
+                    peca.setAttribute('class', 'peca roxa');
+                }   
                 linhaC[ifLinha][ifColuna] = 2;
             }
 
@@ -455,8 +584,13 @@ function abstracaoJogadaValida3(a,b,c,d){
                 let forLinha = parseInt(m)+parseInt(a);
                 casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
                 peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`)
-                casa.setAttribute('class', 'casa white');
-                peca.setAttribute('class', 'peca branco');
+                if(tema == 'claro'){
+                    casa.setAttribute('class', `casa white`);
+                    peca.setAttribute('class', 'peca branco');
+                }else{
+                    casa.setAttribute('class', `casa black`);
+                    peca.setAttribute('class', 'peca preto');
+                }   
                 linhaC[forLinha][forColuna] = 0;
             }
             deQuemEAVez(jogador);
@@ -502,8 +636,13 @@ function abstracaoJogadaValida4(a,b,c,d){
         if(c1==1 && c2==1 && c3==1){
             let casa = document.querySelector(`#casa${a}-${b}`);
             let peca = document.querySelector(`#casa${a}-${b}>div`);
-            casa.setAttribute('class', 'casa white');
-            peca.setAttribute('class', 'peca branco');
+            if(tema == 'claro'){
+                casa.setAttribute('class', `casa white`);
+                peca.setAttribute('class', 'peca branco');
+            }else{
+                casa.setAttribute('class', `casa black`);
+                peca.setAttribute('class', 'peca preto');
+            }   
             let ifLinha = parseInt(a);
             let ifColuna = parseInt(b);
             linhaC[ifLinha][ifColuna] = 0;
@@ -513,12 +652,22 @@ function abstracaoJogadaValida4(a,b,c,d){
             ifColuna = parseInt(d);
 
             if(corAliada == "azul"){
-                casa.setAttribute('class', `casa blue`);
-                peca.setAttribute('class', 'azul');
+                if(tema == 'claro'){
+                    casa.setAttribute('class', `casa blue`);
+                    peca.setAttribute('class', 'peca azul');
+                }else{
+                    casa.setAttribute('class', `casa green`);
+                    peca.setAttribute('class', 'peca verde');
+                }   
                 linhaC[ifLinha][ifColuna] = 1;
             }else{
-                casa.setAttribute('class', `casa red`);
-                peca.setAttribute('class', 'vermelha');
+                if(tema == 'claro'){
+                    casa.setAttribute('class', `casa red`);
+                    peca.setAttribute('class', 'peca vermelha');
+                }else{
+                    casa.setAttribute('class', `casa purple`);
+                    peca.setAttribute('class', 'peca roxa');
+                }   
                 linhaC[ifLinha][ifColuna] = 2;
             }
 
@@ -527,8 +676,13 @@ function abstracaoJogadaValida4(a,b,c,d){
                 let forColuna = parseInt(b);
                 casa = document.querySelector(`#casa${forLinha}-${forColuna}`);
                 peca = document.querySelector(`#casa${forLinha}-${forColuna}>div`);
-                casa.setAttribute('class', 'casa white');
-                peca.setAttribute('class', 'peca branco');
+                if(tema == 'claro'){
+                    casa.setAttribute('class', `casa white`);
+                    peca.setAttribute('class', 'peca branco');
+                }else{
+                    casa.setAttribute('class', `casa black`);
+                    peca.setAttribute('class', 'peca preto');
+                }   
                 linhaC[forLinha][forColuna] = 0;
 
 
@@ -599,9 +753,9 @@ function endGame(){
     }
     const mensagem = document.querySelector("#mensagem>p");
     if(corAliada == 'azul'&&azulJoga==0){
-        mensagem.innerHTML = 'A cor vermelha saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
+        mensagem.innerHTML = 'A cor roxa saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
     }else if(corAliada == 'vermelha'&&vermelhoJoga == 0){
-        mensagem.innerHTML = 'A cor azul saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
+        mensagem.innerHTML = 'A cor verde saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
     }
 }
 
