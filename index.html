@@ -9,12 +9,15 @@
     <script src="tabuleiro.js" defer></script>
   </head>
   <body>
+    <header>
+      <div><img id="img" src="/konani/lua.png" alt="Imagem de uma Lua"> </div>
+    </header>
     <main>
       <h1>KONANE!</h1>
       <div id="tabuleiro"></div>
       <div id="contador">
         <label for="dimensoes">Dimensões</label>
-        <input type="number" name="dimensoes" id="dimensoes" value="6" step="2"/>
+        <input type="number" name="dimensoes" id="dimensoes" value="6" step="2" min="4"/>
         <input type="button" value="RESTART" id="restart" />
       </div>
       <div id="mensagem"><p></p></div>
