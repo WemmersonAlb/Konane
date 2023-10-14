@@ -5,6 +5,18 @@ Disciplina: Desenvolvimento WEB 1
 Prova da Segunda Unidade
 Data de entrega: 08/02/2023
 */
+const jogar = document.querySelector('#jogar');
+const jogar1 = document.querySelector('#jogar1');
+
+function jogarKonane(){
+    const fade = document.querySelector('#fade');
+    fade.style.display ='none';
+}
+jogar.addEventListener('click', jogarKonane);
+jogar1.addEventListener('click', jogarKonane);
+
+
+
 const dimensoes = document.querySelector('#dimensoes');
 const restart = document.querySelector('#restart');
 
@@ -33,7 +45,7 @@ restart.addEventListener('click', ()=>{
 window.addEventListener('load', () =>{
     construirCasas(6);
     const mensagem = document.querySelector('#mensagem>p');
-    mensagem.innerHTML = "É a vez da cor verde!";
+    mensagem.innerHTML = "É a vez da cor azul!";
 });
 
 dimensoes.addEventListener('change', () =>{
@@ -50,7 +62,7 @@ dimensoes.addEventListener('change', () =>{
         document.querySelector('#dimensoes').setAttribute('value', 4);
     }
     const mensagem = document.querySelector('#mensagem>p');
-    mensagem.innerHTML = "É a vez da cor Verde!";
+    mensagem.innerHTML = "É a vez da cor Azul!";
 });
 
 
@@ -154,12 +166,12 @@ function excluirCasas(){
 function deQuemEAVez(n){
     const mensagem = document.querySelector('#mensagem>p');
     if(n === 1){
-        mensagem.innerHTML = "É a vez da cor Roxa!";
+        mensagem.innerHTML = "É a vez da cor Vermelha!";
         corAliada = 'vermelha';
         corInimiga = 'azul';
         jogador = 0;
     }else{
-        mensagem.innerHTML = "É a vez da cor Verde!";
+        mensagem.innerHTML = "É a vez da cor Azul!";
         corAliada = 'azul';
         corInimiga = 'vermelha';
         jogador = 1;
@@ -599,9 +611,9 @@ function endGame(){
     }
     const mensagem = document.querySelector("#mensagem>p");
     if(corAliada == 'azul'&&azulJoga==0){
-        mensagem.innerHTML = 'A cor roxa saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
+        mensagem.innerHTML = 'A cor vermelha saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
     }else if(corAliada == 'vermelha'&&vermelhoJoga == 0){
-        mensagem.innerHTML = 'A cor verde saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
+        mensagem.innerHTML = 'A cor azul saiu vitoriosa !!!<br>Pressione Restart para iniciar um novo jogo =D';
     }
 }
 

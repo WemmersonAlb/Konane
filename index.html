@@ -9,6 +9,43 @@
     <script src="tabuleiro.js" defer></script>
   </head>
   <body>
+    <div class="fade" id="fade">
+      <div class="modal">
+        <div class="buttondivEsquerda">
+          <button class="button" id="jogar">X</button>
+
+        </div>
+        <div class="headerModal">
+          <h1>Bem vindo ao Konane!!!</h1>
+        </div>
+        <div class="bodyModal">
+          <div class="imgEmbaixo">
+            <p>
+              K¯onane é um jogo de tabuleiro e estratégia para dois jogadores. Ele é jogado em um tabuleiro retangular onde as peças dos jogadores são posicionadas de forma alternada, exceto duas posições centrais. Cada jogador será representado por uma cor e, alternadamente, move uma peça sua.
+            </p>
+            <img src="konane.png" alt="Demonstração da jogada" style="width: 400px;">
+          </div>
+
+          <div class="imgDireita">
+            <p>
+              Uma peça pode ser movimentada desde que esteja adjacente (na horizontal ou vertical mas não na diagonal) a outra peça adversária e possa saltar por cima desta ficando na casa imediatamente a seguir (que tem de estar desocupada). A peça saltada é capturada e removida do tabuleiro (à semelhança das Damas). Isto significa que devem ocorrer capturas em todos os lances de uma partida de K¯onane.
+            </p>
+            <img src="pegaum.png" alt="Demonstração da jogada" style="width: 200px;">
+          </div>
+
+          <div class="imgEsquerda">
+            <p>
+              Após uma captura, a peça movimentada pode, opcionalmente e se houver essa possibilidade, continuar a capturar peças adversárias desde que o faça no mesmo sentido (ou seja, não pode alterar a direção da captura no meio da jogada). Ganha o jogador que realizar a última jogada.
+            </p>
+            <img src="pegadois.png" alt="Demonstração da jogada" style="width: 334px;">
+          </div>
+
+          <div class="buttondiv">
+            <button class="button" id="jogar1">Vamos Jogar!</button>
+          </div>
+        </div>
+      </div>
+      </div>
     <main>
       <h1>KONANE!</h1>
       <div id="tabuleiro"></div>
@@ -18,7 +55,7 @@
         <input type="button" value="RESTART" id="restart" />
       </div>
       <div id="mensagem"><p></p></div>
-      
+
       </div>
     </main>
   </body>
